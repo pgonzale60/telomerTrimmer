@@ -5,17 +5,22 @@ def reverse_complement_sequence(seq):
     reverse_complement = "".join(complement.get(base, base) for base in reversed(seq))
     return reverse_complement
 
-def trim_seq(seq, min_occur, motif_size, motif, rev_motif):
+def trim_seq(seq, min_occur, motif_size, motif, rev_motif, longer_motif, longer_rev_motif):
     trimmed_sequence = ''
     matches_start = seq.find(rev_motif, 0, motif_size * 3)
     matches_end = seq.find(motif, -motif_size * 3)
     if matches_start >= 0:
-        if not matches_end >= 0:
-            telomere_pos = seq.rfind(rev_motif * min_occur) + (motif_size * min_occur)
+        # longer_motif_matches_start = seq.find(longer_rev_motif, 0, motif_size * min_occur * 3)
+        longer_motif_matches_start = seq.rfind(longer_rev_motif)
+        if longer_motif_matches_start >= 0:
+            telomere_pos = longer_motif_matches_start + (motif_size * min_occur)
             trimmed_sequence = seq[telomere_pos:]
     elif matches_end >= 0:
-        telomere_pos = seq.find(motif * min_occur)
-        trimmed_sequence = reverse_complement_sequence(seq[0:telomere_pos])
+        # longer_motif_matches_end = seq.find(longer_motif, 0, motif_size * min_occur * 3)
+        longer_motif_matches_end = seq.find(longer_motif)
+        if longer_motif_matches_end >= 0:
+            telomere_pos = longer_motif_matches_end
+            trimmed_sequence = reverse_complement_sequence(seq[0:telomere_pos])
     return trimmed_sequence
 
 def readfq(fp): # this is a generator function
