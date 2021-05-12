@@ -7,8 +7,8 @@ def reverse_complement_sequence(seq):
 
 def trim_seq(seq, min_occur, motif_size, motif, rev_motif, longer_motif, longer_rev_motif):
     trimmed_sequence = ''
-    matches_start = seq.find(rev_motif, 0, motif_size * 3)
-    matches_end = seq.find(motif, -motif_size * 3)
+    matches_start = seq.find(rev_motif, 0, motif_size * 15)
+    matches_end = seq.find(motif, -motif_size * 15)
     if matches_start >= 0:
         # longer_motif_matches_start = seq.find(longer_rev_motif, 0, motif_size * min_occur * 3)
         longer_motif_matches_start = seq.rfind(longer_rev_motif)
