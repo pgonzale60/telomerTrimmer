@@ -47,7 +47,7 @@ if __name__ == "__main__":
     seq_in_mem_len      = 0
 
     if os.path.exists(outfile):
-        print("[WARING] Overwriting existing file: {}".format(outfile))
+        print("[WARNING] Overwriting existing file: {}".format(outfile))
         os.remove(outfile)
 
     for name, seq, qual in readfq(sys.stdin):
