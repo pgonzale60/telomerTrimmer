@@ -63,3 +63,7 @@ if __name__ == "__main__":
                     ofh.writelines(telomeric_reads)
                 telomeric_reads = ''
                 seq_in_mem_len = 0
+    
+    if seq_in_mem_len > 0:
+        with open(outfile, 'a') as ofh:
+                    ofh.writelines(telomeric_reads)
